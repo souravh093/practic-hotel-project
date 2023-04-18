@@ -1,0 +1,26 @@
+[
+    {
+        "image": "https://i.ibb.co/r3g1FGH/item1.jpg",
+        "name": "Dalina Super Room",
+        "bed": 2,
+        "people": 2,
+        "price": 200
+    },
+    {
+        "image": "https://i.ibb.co/jVmBz4C/item2.jpg",
+        "name": "Dalina Super Room",
+        "bed": 1,
+        "people": 2,
+        "price": 150
+    },
+    {
+        "image": "https://i.ibb.co/NnNvjtV/item3.jpg",
+        "name": "Dalina Super Room",
+        "bed": 3,
+        "people": 5,
+        "price": 500
+    }
+]
+
+
+
