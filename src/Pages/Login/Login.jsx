@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
+  const { loginUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleLoginUser = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    setError('')
+    setSuccess('')
+    loginUser(email, password).then((result) => {
+      const loggedUsers = result.user;
+      form.reset()
+      console.log(loggedUsers)
+      setSuccess("Successfully logged")
+    }).catch((error) => {
+      setError(error.message)
+    });
+  };
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -10,10 +33,14 @@ const Login = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              onSubmit={handleLoginUser}
+              className="space-y-4 md:space-y-6"
+              action="#"
+            >
               <div>
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Your email
@@ -29,7 +56,7 @@ const Login = () => {
               </div>
               <div>
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Password
@@ -56,7 +83,7 @@ const Login = () => {
                   </div>
                   <div className="ml-3 text-sm">
                     <label
-                      for="remember"
+                      htmlFor="remember"
                       className="text-gray-500 dark:text-gray-300"
                     >
                       Remember me
@@ -86,6 +113,8 @@ const Login = () => {
                 </Link>
               </p>
             </form>
+            <p className="text-red-500">{error}</p>
+            <p className="text-success">{success}</p>
           </div>
         </div>
       </div>
